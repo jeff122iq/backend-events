@@ -1,13 +1,13 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const URL = process.env.MONGO_URI;
 
 app.use(express.json({ extended: true }));
-
 app.use('/api', require('./routes/index'));
 
 async function start() {
