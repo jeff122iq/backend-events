@@ -1,30 +1,37 @@
 const User = require('../models/user');
-const fs = require('fs');
-const crypto = require('crypto');
-
-const algorithm = 'aes-256-ctr';
+const { Worker } = require('worker_threads');
+const { v4: uuidv4 } = require('uuid');
 
 async function signUp(req, res) {
   try {
     const {file, body, fileValidationError} = req;
     const { firstname, lastname, email, dob } = body;
-    const cipher = crypto.createCipheriv(algorithm, 'vOVH6sdmpNWjRRIqCc7rdxs01lwHzfr3', crypto.randomBytes(16));
+    const fileName = uuidv4().toString();
 
     if (fileValidationError)
       return res.status(500).send({message: `${fileValidationError}`});
 
-      const buf = Buffer.from(file.path, 'base64');
+    const user = new User({
+      firstname,
+      lastname,
+      email, 
+      dob, 
+      pictures: `/public/${fileName}.txt`
+    });
+    await user.save();
 
-      console.log(buf)
-      const encrypted = Buffer.concat([cipher.update(buf), cipher.final()]);
-      console.log(encrypted.toString('hex'))
-  
+    const worker = new Worker('./src/worker/index.js');
+    worker.postMessage({file, fileName})
 
-    //const user = new User({firstname, lastname, email, dob});
-    //await user.save();
-    
-    
     res.status(201).send({message: 'work'});
+  } catch (e) {
+    res.status(500).send({message: `Something wrong --> ${e.message}`});
+  }
+}
+
+async function getUser(req, res) {
+  try {
+    res.status(201).send(user);
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }
@@ -68,6 +75,7 @@ function unregisterEvent(req, res) {
 
 module.exports = {
   signUp,
+  getUser,
   signIn,
   logOut,
   registerEvent,

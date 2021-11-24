@@ -11,14 +11,15 @@ const usersShema = new Schema({
   },
   email: {
     type: String,
-    require: true
+    require: true,
+    unique: true
   },
   dob: {
     type: Date,
     required: true
   },
   pictures: {
-    type: Buffer,
+    type: String,
     required: true
   }
 },
