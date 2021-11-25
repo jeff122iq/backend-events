@@ -21,6 +21,10 @@ const usersShema = new Schema({
   pictures: {
     type: String,
     required: true
+  },
+  password: {
+    type: String,
+    required: true
   }
 },
 {
