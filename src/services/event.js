@@ -1,10 +1,25 @@
 const Event = require('../models/event');
+const { validationResult } = require('express-validator');
 
 async function createEvent(req, res) {
   try {
-    const { body } = req;
+    const { body, session } = req;
     const { name, location, startdate, enddate } = body;
-    const event = new Event({name, location, startdate, enddate});
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const event = new Event({
+      name,
+      location,
+      startdate: new Date(Date.parse(startdate) + 120 * 60 * 1000),
+      enddate: new Date(Date.parse(enddate) + 120 * 60 * 1000),
+      creator: session.passport.user,
+      users: session.passport.user,
+      closed: false
+    });
     await event.save();
     res.status(201).send({event, message: 'add event'});
   } catch (e) {

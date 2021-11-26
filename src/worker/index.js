@@ -20,8 +20,9 @@ parentPort.on('message', msg => {
       if(err) {
           return console.log(err);
       }
-      console.log('The file was saved!');
-  });
+      return console.log('The file was saved!');
+    });
+  
   } catch (e) {
     console.log(e);
   }

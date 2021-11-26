@@ -29,6 +29,7 @@ require('./config/config-passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', require('./routes/index'));
+require('./config/config-cron');
 
 async function start() {
     try {

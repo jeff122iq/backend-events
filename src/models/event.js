@@ -16,6 +16,19 @@ const eventsShema = new Schema({
   enddate: {
     type: Date,
     required: true
+  },
+  creator: {
+    type: Types.ObjectId,
+    require: true,
+    ref: 'Users'
+  },
+  users: [{
+    type: Types.ObjectId,
+    ref: 'Users'
+  }],
+  closed: {
+    type: Boolean,
+    required: true
   }
 },
 {
