@@ -1,9 +1,8 @@
 function fileFilter (req, file, cb) {
-  if (file.mimetype !== ('image/png' || 'image/jpg')) {
-    req.fileValidationError = 'goes wrong on the mimetype';
-    return cb(null, false, new Error('goes wrong on the mimetype'));
-  }
-  cb(null, true);
+  if (file.mimetype.match('image/png') || file.mimetype.match('image/jpeg'))
+    return cb(null, true); 
+  req.fileValidationError = 'goes wrong on the mimetype';
+  cb(null, false, new Error('goes wrong on the mimetype'));
  }
 
 module.exports = {

@@ -16,12 +16,11 @@ async function signUp(req, res) {
     const pass = await bcrypt.hash(password, saltRounds);
     
     const errors = validationResult(req);
-    if (!errors.isEmpty()) {
+    if (!errors.isEmpty()) 
       return res.status(400).json({ errors: errors.array() });
-    }
-
+    
     if (fileValidationError)
-      return res.status(500).send({message: `${fileValidationError}`});
+      return res.status(400).send({message: `${fileValidationError}`});
     
     const user = new User({
       firstname,
@@ -44,7 +43,7 @@ async function signUp(req, res) {
 function signIn(req, res, next) {
   passport.authenticate('local', function(err, user) {
     if (err) { return next(err); }
-    if (!user) { return res.status(404).send('not found user'); }
+    if (!user) { return res.status(404).send({message: 'not found user'}); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       return res.status(201).send({user, message: 'User is login!!!'});
