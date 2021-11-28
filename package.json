@@ -12,7 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^27.3.1",
-    "mz": "^2.7.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.1.6"
   },
@@ -31,8 +30,6 @@
     "passport": "^0.5.0",
     "passport-local": "^1.0.0",
     "session-file-store": "^1.5.0",
-    "swagger-jsdoc": "^6.1.0",
-    "swagger-ui-express": "^4.1.6",
     "uuid": "^8.3.2"
   },
   "jest": {
@@ -41,5 +38,11 @@
       "/node_modules/",
       "/sessions/"
     ]
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "tests/*"
+    ],
+    "delay": 2500
   }
 }

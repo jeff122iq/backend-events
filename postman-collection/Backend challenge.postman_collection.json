@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "150e7429-ff74-4100-8e47-179a41be99ff",
+		"name": "Backend challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth user",
+			"item": [
+				{
+					"name": "Register to platform",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "test.jpg"
+								},
+								{
+									"key": "firstname",
+									"value": "Post",
+									"type": "text"
+								},
+								{
+									"key": "lastname",
+									"value": "Man",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "post@man.com",
+									"type": "text"
+								},
+								{
+									"key": "dob",
+									"value": "2001-02-12",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "PostMan1337_",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign in to platform",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "post@man.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "PostMan1337_",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout to platform",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register to event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/event/register/:_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"event",
+								"register",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unregister to event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/user/event/unregister/:_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"event",
+								"unregister",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CRUD Event",
+			"item": [
+				{
+					"name": "Create event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test Event",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "London, UK",
+									"type": "text"
+								},
+								{
+									"key": "startdate",
+									"value": "2021-12-10 10:00",
+									"type": "text"
+								},
+								{
+									"key": "enddate",
+									"value": "2022-01-01 10:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/event/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"event",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get info about event",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/event/:_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"event",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Test Event V2",
+									"type": "text"
+								},
+								{
+									"key": "location",
+									"value": "Kiyv, UA",
+									"type": "text"
+								},
+								{
+									"key": "startdate",
+									"value": "2021-12-15 12:58",
+									"type": "text"
+								},
+								{
+									"key": "enddate",
+									"value": "2022-01-08 18:50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/event/update/:_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"event",
+								"update",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/event/delete/:_id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"event",
+								"delete",
+								":_id"
+							],
+							"variable": [
+								{
+									"key": "_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -55,7 +55,18 @@ router.post('/event/create',
   (req, res) => createEvent(req, res)
 );
 router.get('/event/:_id', auth, (req, res) => detailEvent(req, res));
-router.put('/event/update/:_id', upload.none(), auth, (req, res) => updateEvent(req, res));
+router.put('/event/update/:_id', 
+  upload.none(), 
+  auth,
+  body('name').optional({ checkFalsy: true }).isString(),
+  body('location').optional({ checkFalsy: true }).isString(),
+  body('startdate').optional({ checkFalsy: true })
+    .isISO8601('yyyy-mm-dd hh:mm')
+    .isAfter(new Date(Date.now()).toISOString()),
+  body('enddate').optional({ checkFalsy: true })
+    .isISO8601('yyyy-mm-dd hh:mm')
+    .custom((val, meta) => isStartEndDate(val, meta)),
+  (req, res) => updateEvent(req, res));
 router.delete('/event/delete/:_id', upload.none(), auth, (req, res) => removeEvent(req, res));
 
 //END_EVENT_ROUT

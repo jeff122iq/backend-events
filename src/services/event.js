@@ -40,12 +40,24 @@ async function detailEvent(req, res) {
 async function updateEvent(req, res) {
   try {
     const { body, params, session } = req;
+    const { name, location, startdate, enddate } = body;
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const update = await Event.updateOne({
         _id: params._id,
         client: session.passport.user 
       }, 
-      {...body});
-    
+      {
+        name,
+        location,
+        startdate: startdate ? new Date(Date.parse(startdate) + 120 * 60 * 1000) : startdate,
+        enddate: enddate ? new Date(Date.parse(enddate) + 120 * 60 * 1000) : enddate,
+      });
+
     if (!update.matchedCount)
       return res.status(404).send({message: 'haven\'t this item'});
     
