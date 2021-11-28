@@ -4,7 +4,9 @@
 
 ```sh
 yarn
-node app
+```
+```sh
+yarn start:dev
 ```
 
 Add .env and the missing parts to it.
