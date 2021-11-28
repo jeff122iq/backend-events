@@ -1,10 +1,14 @@
 require('dotenv').config();
 const express = require('express');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swDocument = require('./openapi');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const mongoose = require('mongoose');
 const passport = require('passport');
 
+const specs = swaggerJsDoc(swDocument)
 const app = express();
 const PORT = process.env.PORT || 5000;
 const URL = process.env.MONGO_URI;
@@ -29,6 +33,7 @@ require('./config/config-passport');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/api', require('./routes/index'));
+app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(specs));
 require('./config/config-cron');
 
 async function start() {

@@ -39,8 +39,12 @@ async function detailEvent(req, res) {
 
 async function updateEvent(req, res) {
   try {
-    const { body, params } = req;
-    const update = await Event.updateOne({_id: params._id}, {...body});
+    const { body, params, session } = req;
+    const update = await Event.updateOne({
+        _id: params._id,
+        client: session.passport.user 
+      }, 
+      {...body});
     
     if (!update.matchedCount)
       return res.status(404).send({message: 'haven\'t this item'});
@@ -56,8 +60,11 @@ async function updateEvent(req, res) {
 
 async function removeEvent(req, res) {
   try {
-    const { params } = req;
-    const remove = await Event.deleteOne({_id: params._id});
+    const { params, session } = req;
+    const remove = await Event.deleteOne({
+      _id: params._id,
+      creator: session.passport.user 
+    });
     
     if (!remove.deletedCount)
       return res.status(404).send({message: 'haven\'t this item'});
