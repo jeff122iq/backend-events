@@ -23,7 +23,7 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app use nodemoon.\
+Runs the app use node.
 
 ```sh
 "start": "node src/index.js"
@@ -31,7 +31,7 @@ Runs the app use nodemoon.\
 
 ### `yarn start:dev`
 
-Runs the app use nodemoon.\
+Runs the app use nodemoon.
 
 ```sh
 "start:dev": "nodemoon src/index.js"
@@ -39,7 +39,7 @@ Runs the app use nodemoon.\
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
 
 ```sh
