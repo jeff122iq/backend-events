@@ -31,7 +31,7 @@ async function detailEvent(req, res) {
   try {
     const { params } = req;
     const result = await Event.findOne({_id: params._id});
-    res.status(201).send(result);
+    res.status(200).send(result);
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }
@@ -81,7 +81,7 @@ async function removeEvent(req, res) {
     if (!remove.deletedCount)
       return res.status(404).send({message: 'haven\'t this item'});
 
-    res.status(201).send({message: 'item delete'});
+    res.status(200).send({message: 'item delete'});
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }

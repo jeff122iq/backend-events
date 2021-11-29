@@ -46,7 +46,7 @@ function signIn(req, res, next) {
     if (!user) { return res.status(404).send({message: 'not found user'}); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.status(201).send({user, message: 'User is login!!!'});
+      return res.status(200).send({user, message: 'User is login!!!'});
     });
   })(req, res, next);
 }
@@ -54,7 +54,7 @@ function signIn(req, res, next) {
 function logOut(req, res) {
   try {
     req.logout();
-    res.status(201).send({message: 'user logout'});
+    res.status(200).send({message: 'user logout'});
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }
@@ -112,7 +112,7 @@ async function unregisterEvent(req, res) {
       if (!update.modifiedCount) 
         return res.status(201).send({message: 'user was unregistered'});
     }
-    res.status(201).send({message: 'unregister user on event'});
+    res.status(200).send({message: 'unregister user on event'});
   } catch (e) {
     res.status(500).send({message: `Something wrong --> ${e.message}`});
   }

@@ -83,7 +83,7 @@ describe('POST: sign in user', () => {
       .post('/api/signin')
       .field('email', 'jon@doew.test')
       .field('password', 'IamTester1337!!');
-    expect(res.statusCode).toEqual(201);
+    expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message', 'User is login!!!');
   });
 
@@ -161,7 +161,7 @@ describe('POST: registration and unregistration for the event', () => {
     const res = await agent
       .post(`/api/user/event/unregister/${EVENT_ID}`)
       .set('Cookie', cookie);
-    expect(res.statusCode).toEqual(201);
+    expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message', 'unregister user on event');
   });
 });
@@ -188,7 +188,7 @@ describe('GET, PUT, DELETE: work with events', () => {
       const res = await agent
         .get(`/api/event/${EVENT_ID}`)
         .set('Cookie', cookie);
-      expect(res.statusCode).toEqual(201);
+      expect(res.statusCode).toEqual(200);
   });
 
   it('PUT: (User update info about event) > response 201', async () => {
@@ -212,7 +212,7 @@ describe('GET, PUT, DELETE: work with events', () => {
   it('DELETE: (User remove event) > response 201', async () => {
     const res = await agent
       .delete(`/api/event/delete/${EVENT_ID}`);
-    expect(res.statusCode).toEqual(201);
+    expect(res.statusCode).toEqual(200);
     expect(res.body).toHaveProperty('message', 'item delete');
   });
 
