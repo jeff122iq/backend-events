@@ -24,7 +24,6 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.env
 
 /public
 /sessions

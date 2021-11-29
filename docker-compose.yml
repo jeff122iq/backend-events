@@ -1,0 +1,19 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    ports:
+      - 27117:27017
+    volumes:
+      - mongodb:/data/db
+ #   depends_on:
+ #     - node
+  node:
+    restart: always
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./:/code
+volumes:
+      mongodb:
